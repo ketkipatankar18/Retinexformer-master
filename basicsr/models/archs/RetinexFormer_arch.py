@@ -374,35 +374,14 @@ device = (
 )
 print(f"Using {device} device")
 
-# model = RetinexFormer().to(device)
 model = RetinexFormer(stage=1,n_feat=40,num_blocks=[1,2,2]).to(device)
-# print(torch.to(device).memory_allocated())  # In bytes
-# print(torch.cuda.current_allocated_memory())   # In bytes
-# print(torch.cuda.driver_allocated_memory())
-# print(torch.cuda.memory_allocated())  # In bytes
-# print(torch.cuda.memory_reserved())   # In bytes
-# print(torch.cuda.memory_summary())
-# print(model)
 check=torch.load("drive/MyDrive/Retinexformer-master/pretrained_weights/NTIRE.pth",weights_only=True)
-# check=torch.load("/Applications/anaconda3/envs/dip/RETINEXFORMER/Retinex/Retinexformer-master/pretrained_weights/NTIRE.pth",weights_only=True)
-# print('Checkpoint= '+str(check))
-# print()
-# print('params= '+str(check['params']))
-
-# text_file = open("Output.txt", "w")
-# text_file.write("Checkpoint= "+str(check)+"\n"+ "params= "+str(check['params']))
-# text_file.close()
-# model.load_state_dict(torch.load("/Applications/anaconda3/envs/dip/RETINEXFORMER/Retinex/Retinexformer-master/pretrained_weights/NTIRE.pth",weights_only=True))
 model.load_state_dict(check['params'])
-# ,strict=False
-# , weights_only=True
 def load_img(filepath):
     return cv2.cvtColor(cv2.imread(filepath), cv2.COLOR_BGR2RGB)
 
 input_dir = "drive/MyDrive/Retinexformer-master/data/NTIRE/mini_val/input/"
 target_dir = "drive/MyDrive/Retinexformer-master/data/NTIRE/mini_val/target/"
-# input_dir = "drive/MyDrive/Retinexformer-master/basicsr/models/archs/LLFormer_input/"
-# target_dir = "drive/MyDrive/Retinexformer-master/basicsr/models/archs/LLFormer_target/"
 print(input_dir)
 print(target_dir)
 
@@ -417,9 +396,6 @@ psnr_values = []
 ssim_values = []
 
 def calculate_psnr(img1, img2, border=0):
-    # img1 and img2 have range [0, 255]
-    #img1 = img1.squeeze()
-    #img2 = img2.squeeze()
     if not img1.shape == img2.shape:
         raise ValueError('Input images must have the same dimensions.')
     h, w = img1.shape[:2]
@@ -466,8 +442,6 @@ def calculate_ssim(img1, img2, border=0):
     the same outputs as MATLAB's
     img1, img2: [0, 255]
     '''
-    #img1 = img1.squeeze()
-    #img2 = img2.squeeze()
     if not img1.shape == img2.shape:
         raise ValueError('Input images must have the same dimensions.')
     h, w = img1.shape[:2]
@@ -493,17 +467,11 @@ def save_img(filepath, img):
 with torch.inference_mode():
     for inp_path, tar_path in tqdm(zip(input_paths, target_paths), total=len(target_paths)):
     # for inp_path in tqdm(input_paths, total=len(input_paths)):
-# inp_path="drive/MyDrive/Retinexformer-master/data/NTIRE/mini_val/input/1.png"
-# tar_path="drive/MyDrive//Retinexformer-master/data/NTIRE/mini_val/target/1.png"
-# inp_path="/Applications/anaconda3/envs/dip/RETINEXFORMER/Retinex/Retinexformer-master/data/NTIRE/mini_val/input/1.png"
-# tar_path="/Applications/anaconda3/envs/dip/RETINEXFORMER/Retinex/Retinexformer-master/data/NTIRE/mini_val/target/1.png"
         img = np.float32(load_img(inp_path)) / 255.
         target = np.float32(load_img(tar_path)) / 255.
 
         img = torch.from_numpy(img).permute(2, 0, 1)
-        # input_ = img.unsqueeze(0).cuda()
         input_ = img.unsqueeze(0).cpu()
-        # input_ = img.unsqueeze(0).to(device)
         factor = 4
         # Padding in case images are not multiples of 4
         b, c, h, w = input_.shape
@@ -514,32 +482,7 @@ with torch.inference_mode():
         input_ = F.pad(input_, (0, padw, 0, padh), 'reflect')
 
         restored=model(input_)
-        # print('Inference step padded input=' +str(input_))
-        # args = parser.parse_args()
-
-        # if h < 3000 and w < 3000:
-        #     if args.self_ensemble:
-        #         print('Inside if of ensemble')
-        #         restored = self_ensemble(input_, model_restoration)
-        #         # print('Inference step restored input=' +str(restored))
-        #     else:
-        #         print('else of emsemble')
-        #         restored = model_restoration(input_)
-        #         print('Inference step restored input=' +str(restored))
-        # else:
-        #     # split and test
-        #     input_1 = input_[:, :, :, 1::2]
-        #     input_2 = input_[:, :, :, 0::2]
-        #     if args.self_ensemble:
-        #         restored_1 = self_ensemble(input_1, model_restoration)
-        #         restored_2 = self_ensemble(input_2, model_restoration)
-        #     else:
-        #         restored_1 = model_restoration(input_1)
-        #         restored_2 = model_restoration(input_2)
-        #     restored = torch.zeros_like(input_)
-        #     restored[:, :, :, 1::2] = restored_1
-        #     restored[:, :, :, 0::2] = restored_2
-
+        
         # Unpad images to original dimensions
         restored = restored[:, :, :h, :w]
 
@@ -558,23 +501,3 @@ psnr_values = np.mean(np.array(psnr_values))
 ssim_values = np.mean(np.array(ssim_values))
 print("PSNR: %f " % (psnr_values))
 print("SSIM: %f " % (ssim_values))
-
-
-# restored = torch.clamp(restored, 0, 1).to(device)(
-# ).detach().permute(0, 2, 3, 1).squeeze(0).numpy()
-
-# if args.GT_mean:
-#     # This test setting is the same as KinD, LLFlow, and recent diffusion models
-#     # Please refer to Line 73 (https://github.com/zhangyhuaee/KinD/blob/master/evaluate_LOLdataset.py)
-#     mean_restored = cv2.cvtColor(restored.astype(np.float32), cv2.COLOR_BGR2GRAY).mean()
-#     mean_target = cv2.cvtColor(target.astype(np.float32), cv2.COLOR_BGR2GRAY).mean()
-#     restored = np.clip(restored * (mean_target / mean_restored), 0, 1)
-# if __name__ == '__main__':
-#     from fvcore.nn import FlopCountAnalysis
-#     model = RetinexFormer(stage=1,n_feat=40,num_blocks=[1,2,2]).cuda()
-#     print(model)
-#     inputs = torch.randn((1, 3, 256, 256)).cuda()
-#     flops = FlopCountAnalysis(model,inputs)
-#     n_param = sum([p.nelement() for p in model.parameters()])  # 所有参数数量
-#     print(f'GMac:{flops.total()/(1024*1024*1024)}')
-#     print(f'Params:{n_param}')
