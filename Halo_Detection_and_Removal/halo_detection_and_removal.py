@@ -7,14 +7,10 @@ Original file is located at
     https://colab.research.google.com/drive/1bib5fi1svVFe1owBkmZEFegm6zEbq3Ae
 """
 
-!pip install einops
-
-!pip install natsort
-
 # Commented out IPython magic to ensure Python compatibility.
+from google.colab import drive
+drive.mount('/content/drive')
 # %cd /content
-
-!python3 drive/MyDrive/Retinexformer-master/basicsr/models/archs/RetinexFormer_arch.py
 
 # Approach 1: Halo Mask based Neighbourhood filtering
 
