@@ -2,7 +2,7 @@
 
 ## License
 
-This project is based on [Retinexformer](https://github.com/caiyuanhao1998/Retinexformer), created by Yuanhao Cai and licensed under the MIT License - see the [LICENSE](./LICENSE.txt) file for details.
+This project is based on [Retinexformer](https://github.com/caiyuanhao1998/Retinexformer), created by Yuanhao Cai and licensed under the MIT License - see the [LICENSE](https://github.com/caiyuanhao1998/Retinexformer/blob/master/LICENSE.txt) file for details.
 
 RetinexFormer is a state-of-the-art image enhancement framework designed to improve the quality of low-light images by removing noise and corruption. The model is based on a single-stage Retinex approach integrated with an Illuminance-guided transformer. This framework has shown impressive results in low-light image enhancement, addressing common issues such as noise due to low signal-to-noise ratio (SNR) and color distortions caused by uneven lighting or sensor limitations.
 
