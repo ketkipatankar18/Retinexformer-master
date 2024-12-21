@@ -13,7 +13,7 @@ However, after conducting extensive comparisons with other models, RetinexFormer
 
 We have updated the code in Retinexformer_arch.py to run on CPU instead of GPU, and modified input and target file paths for compatibility. 
 
-Run the ipynb located at: <span style='color: green;'>drive/MyDrive/Retinexformer-master/Retinexformer.ipynb</span>. It contains commands to sucessfully execute the model and view the model output at <span style='color: green;'>drive/MyDrive/Retinexformer-master/ModelOutput</span>. These commands are also listed below.
+Run the ipynb located at: **drive/MyDrive/Retinexformer-master/Retinexformer.ipynb**. It contains commands to sucessfully execute the model and view the model output at **drive/MyDrive/Retinexformer-master/ModelOutput**. These commands are also listed below.
 
 ## Run retinexfromer to view model output
 
@@ -42,9 +42,9 @@ drive.mount('/content/drive')
 
 You will be able to see the model generated output for 15 different images.
 
-<p>The input images will be located at: <span style='color: green;'>drive/MyDrive/Retinexformer-master/data/NTIRE/mini_val/input/</span></p>
-<p>The target\ground truth images will be located at:<span style='color: green;'>drive/MyDrive/Retinexformer-master/data/NTIRE/mini_val/target/</span></p>
-<p>The model output images will be located at:<span style='color: green;'>drive/MyDrive/Retinexformer-master/ModelOutput</span></p>
+The input images will be located at: **drive/MyDrive/Retinexformer-master/data/NTIRE/mini_val/input/**
+The target\ground truth images will be located at: **drive/MyDrive/Retinexformer-master/data/NTIRE/mini_val/target/**
+The model output images will be located at: **drive/MyDrive/Retinexformer-master/ModelOutput**
 
 On analysing the model output, the images that are corrupted with Halo artifact can then be copied to the HaloDetected folder.
 
@@ -56,6 +56,6 @@ This repository contains two approaches for halo removal:
 
 **Neighborhood-based Filtering + Anisotropic Diffusion**: This method combines neighborhood filtering with anisotropic diffusion to refine the halo removal process.
 
- <p>The ipynb file containing the two approaches is present at <span style='color: green;'>drive/MyDrive/Retinexformer-master/Halo_Detection_and_Removal/Halo_Detection_and_Removal.ipynb</span></p>
+ The ipynb file containing the two approaches is present at **drive/MyDrive/Retinexformer-master/Halo_Detection_and_Removal/Halo_Detection_and_Removal.ipynb**
 
- On executing the two approaches presented in this file, you will be able to view the output for each of the image you added in HaloDetected folder under <span style='color: green;'>drive/MyDrive/Retinexformer-master/Halo_Detection_and_Removal/HaloReduced_Approach1</span> and <span style='color: green;'>drive/MyDrive/Retinexformer-master/Halo_Detection_and_Removal/HaloReduced_Approach2</span>.
+ On executing the two approaches presented in this file, you will be able to view the output for each of the image you added in HaloDetected folder under **drive/MyDrive/Retinexformer-master/Halo_Detection_and_Removal/HaloReduced_Approach1** and **drive/MyDrive/Retinexformer-master/Halo_Detection_and_Removal/HaloReduced_Approach2**.
