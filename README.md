@@ -1,19 +1,19 @@
 # **Retinexformer with Halo Detection and Removal**
 
-This project is based on [Retinexformer](https://github.com/caiyuanhao1998/Retinexformer), created by Yuanhao Cai.
+## License
+
+This project is based on [Retinexformer](https://github.com/caiyuanhao1998/Retinexformer), created by Yuanhao Cai and licensed under the MIT License - see the [LICENSE](./LICENSE.txt) file for details.
 
 RetinexFormer is a state-of-the-art image enhancement framework designed to improve the quality of low-light images by removing noise and corruption. The model is based on a single-stage Retinex approach integrated with an Illuminance-guided transformer. This framework has shown impressive results in low-light image enhancement, addressing common issues such as noise due to low signal-to-noise ratio (SNR) and color distortions caused by uneven lighting or sensor limitations.
 
 However, after conducting extensive comparisons with other models, RetinexFormer was found to be the best-performing baseline, though it still exhibited artifacts, particularly halo effects around sharp edges in enhanced images. As a result, this repository adds a feature for automatic halo detection and removal to further improve the quality of the output.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE.txt) file for details.
-
 
 # Retinexformer
 
-We have updated the code in Retinexformer_arch.py to run on CPU instead of GPU, and modified input and target file paths for compatibility. The provided ipynb file contains commands to sucessfully execute the model to view the model output. The same are listed below.
+We have updated the code in Retinexformer_arch.py to run on CPU instead of GPU, and modified input and target file paths for compatibility. 
+
+Run the ipynb located at: <span style='color: green;'>drive/MyDrive/Retinexformer-master/Retinexformer.ipynb</span>. It contains commands to sucessfully execute the model and view the model output at <span style='color: green;'>drive/MyDrive/Retinexformer-master/ModelOutput</span>. These commands are also listed below.
 
 ## Run retinexfromer to view model output
 
