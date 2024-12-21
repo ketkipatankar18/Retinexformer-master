@@ -43,7 +43,9 @@ drive.mount('/content/drive')
 You will be able to see the model generated output for 15 different images.
 
 The input images will be located at: **drive/MyDrive/Retinexformer-master/data/NTIRE/mini_val/input/**
+
 The target\ground truth images will be located at: **drive/MyDrive/Retinexformer-master/data/NTIRE/mini_val/target/**
+
 The model output images will be located at: **drive/MyDrive/Retinexformer-master/ModelOutput**
 
 On analysing the model output, the images that are corrupted with Halo artifact can then be copied to the HaloDetected folder.
